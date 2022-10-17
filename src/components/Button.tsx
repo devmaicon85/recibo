@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ className, children, ...rest }: Props) {
     return (
-        <button {...rest} className={`${className} border border-green-400 rounded p-2 bg-green-900 text-white hover:scale-[98%] transition-all`}>
+        <button {...rest} className={`${className} border rounded p-2 bg-primary text-white hover:scale-[98%] transition-all`}>
             {children}
         </button>
     );

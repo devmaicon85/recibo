@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
-import { Input } from "./components/Input";
-import { Label } from "./components/Label";
-import { Button } from "./components/Button";
+import { Input } from "../components/Input";
+import { Label } from "../components/Label";
+import { Button } from "../components/Button";
 
 import extenso from "extenso";
+import { BoxLabelInput } from "../components/BoxLabelInput";
 
 function App() {
     const [emitente, setEmitente] = useState("");
@@ -13,14 +14,6 @@ function App() {
 
     function sendForm(event: FormEvent) {
         event.preventDefault();
-
-        if (
-            emitente.trim() === "" ||
-            recebemosDe.trim() === "" ||
-            Number(valor) === 0
-        ) {
-            return alert("Preencha todos os campos");
-        }
 
         window.print();
     }
@@ -43,30 +36,33 @@ function App() {
     }
 
     return (
-        <div className="w-full h-screen p-2 sm:p-10 print:p-10 items-center flex flex-col gap-4 ">
+        <div className="w-full h-screen p-2 sm:p-10 mb-20 print:p-10 items-center flex flex-col gap-4  ">
+            <div className="w-full  flex justify-center p-4 sm:p-10 print:hidden">
+                <img src="/assets/logo.svg" />
+            </div>
             <form
                 onSubmit={sendForm}
-                className="flex flex-col gap-4 border border-gray-300 p-4 sm:p-10 max-w-2xl w-full rounded print:hidden"
+                className="flex flex-col gap-4 border-gray-300 p-4 sm:p-10 max-w-2xl w-full rounded print:hidden"
             >
-                <div className="flex-col sm:flex-row print:flex-row flex">
+                <BoxLabelInput>
                     <Label htmlFor="emitente">Quem assina?</Label>
                     <Input
                         id="emitente"
                         value={emitente}
                         onChange={(e) => setEmitente(e.target.value)}
                     />
-                </div>
+                </BoxLabelInput>
 
-                <div className="flex-col sm:flex-row print:flex-row flex">
+                <BoxLabelInput>
                     <Label htmlFor="recebemosDe">Recebi(emos) de:</Label>
                     <Input
                         id="recebemosDe"
                         value={recebemosDe}
                         onChange={(e) => setRecebemosDe(e.target.value)}
                     />
-                </div>
+                </BoxLabelInput>
 
-                <div className="flex-col sm:flex-row print:flex-row flex">
+                <BoxLabelInput>
                     <Label htmlFor="valor">Valor de:</Label>
                     <Input
                         id="valor"
@@ -74,7 +70,7 @@ function App() {
                         value={valor}
                         onChange={(e) => handleValor(e.target.value)}
                     />
-                </div>
+                </BoxLabelInput>
 
                 <div className="flex justify-end">
                     <Button type="submit" className="w-full max-w-[200px]">
@@ -85,7 +81,7 @@ function App() {
 
             <div
                 id="print"
-                className="flex flex-col gap-4 border border-gray-300 p-4 sm:p-10 max-w-2xl w-full rounded"
+                className="flex flex-col gap-4 border border-primary print:border-gray-800 p-4 sm:p-10 max-w-2xl w-full rounded"
                 style={{
                     backgroundImage: "url('/assets/background.svg')",
                     backgroundSize: "100%",
@@ -115,7 +111,7 @@ function App() {
                         })}
                 </div>
                 <div>
-                    <strong>e para clareza firmo (amos) o presente.</strong>
+                    <strong>e para clareza firmo(amos) o presente.</strong>
                 </div>
                 <div className="flex justify-end">
                     {new Date(Date.now()).toLocaleDateString("pt-BR", {
