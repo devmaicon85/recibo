@@ -7,7 +7,7 @@ export function Label({ className, children, ...rest }: Props) {
     return (
         <label
             {...rest}
-            className={`${className} font-bold text-sm truncate min-w-[120px] items-center flex`}
+            className={`${className} mr-4 font-bold text-sm truncate min-w-[120px] items-center flex`}
         >
             {children}
         </label>

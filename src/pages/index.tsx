@@ -6,11 +6,11 @@ import { Button } from "../components/Button";
 import extenso from "extenso";
 import { BoxLabelInput } from "../components/BoxLabelInput";
 
-function App() {
+export function App() {
     const [emitente, setEmitente] = useState("");
     const [recebemosDe, setRecebemosDe] = useState("");
     const [correspondenteA, setCorrespondenteA] = useState("");
-    const [valor, setValor] = useState<number | undefined>(undefined);
+    const [valor, setValor] = useState<number>(0);
     const [valorExtenso, setValorExtenso] = useState("");
 
     function sendForm(event: FormEvent) {
@@ -20,7 +20,7 @@ function App() {
 
     function handleValor(v?: string) {
         if (!v) {
-            setValor(undefined);
+            setValor(0);
             return;
         }
 
@@ -37,7 +37,7 @@ function App() {
 
     return (
         <div className="w-full h-screen p-2 sm:p-10 mb-20 print:p-10 items-center flex flex-col gap-4  ">
-            <div className="w-full  flex justify-center p-4 sm:p-10 print:hidden">
+            <div className="w-full  flex justify-center p-4 sm:pt-10 print:hidden">
                 <img src="/assets/logo.svg" />
             </div>
             <form
@@ -68,7 +68,7 @@ function App() {
                         id="valor"
                         type="number"
                         step="0.01"
-                        value={valor}
+                        value={valor === 0 ? undefined : valor}
                         onChange={(e) => handleValor(e.target.value)}
                     />
                 </BoxLabelInput>
@@ -91,16 +91,16 @@ function App() {
 
             <div
                 id="print"
-                className="flex  flex-col gap-4 border border-primary print:border-gray-800 p-4 print:p-7 sm:p-10 max-w-2xl w-full rounded"
+                className="flex text-base  flex-col gap-4 border border-gray-300 border-dashed print:border-gray-800 p-4 print:p-7 sm:p-10 max-w-2xl w-full rounded"
                 style={{
                     backgroundImage: "url('/assets/background.svg')",
                     backgroundSize: "100%",
                     backgroundPosition: "center",
                 }}
             >
-                <div className="flex flex-row justify-between">
-                    <h2 className="text-2xl font-black">RECIBO</h2>
-                    <span className="text-2xl  font-black h-10 bg-gray-200 px-4 py-1 rounded-xl">
+                <div className="flex flex-col gap-2 xs:flex-row justify-between">
+                    <h2 className="text-2xl font-black items-center flex">RECIBO</h2>
+                    <span className="text-2xl  font-black  bg-gray-200 px-4 py-2 min-h-[10px] rounded-xl">
                         {valor?.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
@@ -108,11 +108,11 @@ function App() {
                     </span>
                 </div>
 
-                <div className="text-lg">
+                <div>
                     <strong>Recebi(emos) de</strong>{" "}
-                    <span className="text-xl">{recebemosDe}</span>
+                    <span>{recebemosDe}</span>
                 </div>
-                <div className="text-lg">
+                <div>
                     <strong>a quantia de </strong>
                     {valorExtenso &&
                         extenso(valorExtenso, {
@@ -120,9 +120,9 @@ function App() {
                             currency: { type: "BRL" },
                         })}
                 </div>
-                <div className="text-lg">
+                <div>
                     <strong>Correspondente a </strong>{" "}
-                    <span className="text-xl">{correspondenteA}</span>
+                    <span>{correspondenteA}</span>
                 </div>
                 <div>
                     <strong>e para clareza firmo(amos) o presente.</strong>
@@ -143,4 +143,3 @@ function App() {
     );
 }
 
-export default App;
