@@ -9,6 +9,7 @@ import { BoxLabelInput } from "../components/BoxLabelInput";
 function App() {
     const [emitente, setEmitente] = useState("");
     const [recebemosDe, setRecebemosDe] = useState("");
+    const [correspondenteA, setCorrespondenteA] = useState("");
     const [valor, setValor] = useState<number | undefined>(undefined);
     const [valorExtenso, setValorExtenso] = useState("");
 
@@ -66,9 +67,18 @@ function App() {
                     <Input
                         id="valor"
                         type="number"
-                        step='0.01'
+                        step="0.01"
                         value={valor}
                         onChange={(e) => handleValor(e.target.value)}
+                    />
+                </BoxLabelInput>
+
+                <BoxLabelInput>
+                    <Label htmlFor="correspondenteA">referente a:</Label>
+                    <Input
+                        id="correspondenteA"
+                        value={correspondenteA}
+                        onChange={(e) => setCorrespondenteA(e.target.value)}
                     />
                 </BoxLabelInput>
 
@@ -81,7 +91,7 @@ function App() {
 
             <div
                 id="print"
-                className="flex  flex-col gap-4 border border-primary print:border-gray-800 p-4 sm:p-10 max-w-2xl w-full rounded"
+                className="flex  flex-col gap-4 border border-primary print:border-gray-800 p-4 print:p-7 sm:p-10 max-w-2xl w-full rounded"
                 style={{
                     backgroundImage: "url('/assets/background.svg')",
                     backgroundSize: "100%",
@@ -90,7 +100,7 @@ function App() {
             >
                 <div className="flex flex-row justify-between">
                     <h2 className="text-2xl font-black">RECIBO</h2>
-                    <span className="text-xl sm:text-3xl print:text-3xl h-10">
+                    <span className="text-2xl  font-black h-10 bg-gray-200 px-4 py-1 rounded-xl">
                         {valor?.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
@@ -109,6 +119,10 @@ function App() {
                             mode: "currency",
                             currency: { type: "BRL" },
                         })}
+                </div>
+                <div className="text-lg">
+                    <strong>Correspondente a </strong>{" "}
+                    <span className="text-xl">{correspondenteA}</span>
                 </div>
                 <div>
                     <strong>e para clareza firmo(amos) o presente.</strong>
