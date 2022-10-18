@@ -14,7 +14,6 @@ function App() {
 
     function sendForm(event: FormEvent) {
         event.preventDefault();
-
         window.print();
     }
 
@@ -67,6 +66,7 @@ function App() {
                     <Input
                         id="valor"
                         type="number"
+                        step='0.01'
                         value={valor}
                         onChange={(e) => handleValor(e.target.value)}
                     />
@@ -81,7 +81,7 @@ function App() {
 
             <div
                 id="print"
-                className="flex flex-col gap-4 border border-primary print:border-gray-800 p-4 sm:p-10 max-w-2xl w-full rounded"
+                className="flex  flex-col gap-4 border border-primary print:border-gray-800 p-4 sm:p-10 max-w-2xl w-full rounded"
                 style={{
                     backgroundImage: "url('/assets/background.svg')",
                     backgroundSize: "100%",
