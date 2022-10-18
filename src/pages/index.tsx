@@ -36,10 +36,10 @@ export function App() {
     }
 
     return (
-        <div className="w-full h-screen p-2 sm:p-10 mb-20 print:p-10 items-center flex flex-col gap-4  ">
-            <div className="w-full  flex justify-center p-4 sm:pt-10 print:hidden">
+        <main className="w-full p-2 sm:p-10 mb-20 print:p-10 items-center flex flex-col gap-4  ">
+            <header className="w-full  flex justify-center p-4 sm:pt-10 print:hidden">
                 <img src="/assets/logo.svg" />
-            </div>
+            </header>
             <form
                 onSubmit={sendForm}
                 className="flex flex-col gap-4 border-gray-300 p-4 sm:p-10 max-w-2xl w-full rounded print:hidden"
@@ -139,7 +139,10 @@ export function App() {
                     {emitente}
                 </div>
             </div>
-        </div>
+            <footer className="flex justify-center mt-10 underline hover:text-primary print:hidden">
+                <a href="https://github.com/devmaicon85/recibo" target="_blank">opensource - acessar git</a>
+            </footer>
+        </main>
     );
 }
 
